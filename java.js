@@ -4,13 +4,11 @@ const login = (urlParam.split(('='))[1]);
 let url = 'https://api.github.com/users/voytov93';
 if (login) {
   url = `https://api.github.com/users/${login}`;
-} else {
-  url = 'https://api.github.com/users/voytov93';
 }
 
 fetch(url)
   .then(response => {
-    if (response.status != 404) {
+    if (response.status !== 404) {
       return response.json();
     } else {
       let err = new Error(response.statusText + ' ' + response.status);
@@ -24,16 +22,15 @@ fetch(url)
     ava.src = json.avatar_url;
     body.append(ava);
 
-    let name = document.createElement('p');
     let link = document.createElement('a');
     link.href = json.html_url;
+    link.style.display = "block";
     if (json.name) {
-      name.innerHTML = json.name;
+      link.innerHTML = json.name;
     } else {
-      name.innerHTML = 'Информация о пользователе недоступна';
+      link.innerHTML = 'Информация о пользователе недоступна';
     }
     body.appendChild(link);
-    link.appendChild(name);
 
     let bio = document.createElement('p');
     if (json.bio) {
