@@ -2,8 +2,11 @@ const body = document.body;
 const urlParam = window.location.search.substring(1);
 const login = (urlParam.split(('='))[1]);
 let url = 'https://api.github.com/users/voytov93';
-if (urlParam != '') {
+if (login) {
   url = `https://api.github.com/users/${login}`;
+}
+
+else {url = 'https://api.github.com/users/voytov93}';
 }
 
 fetch(url)
