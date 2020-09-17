@@ -4,9 +4,8 @@ const login = (urlParam.split(('='))[1]);
 let url = 'https://api.github.com/users/voytov93';
 if (login) {
   url = `https://api.github.com/users/${login}`;
-}
-
-else {url = 'https://api.github.com/users/voytov93}';
+} else {
+  url = 'https://api.github.com/users/voytov93';
 }
 
 fetch(url)
@@ -26,17 +25,18 @@ fetch(url)
     body.append(ava);
 
     let name = document.createElement('p');
-    name.classList.add('link');
-    name.addEventListener("click", () => window.location = json.html_url);
-    if (json.name != null) {
+    let link = document.createElement('a');
+    link.href = json.html_url;
+    if (json.name) {
       name.innerHTML = json.name;
     } else {
-      name.innerHTML = 'Информация о пользователe недоступна';
+      name.innerHTML = 'Информация о пользователе недоступна';
     }
-    body.append(name);
+    body.appendChild(link);
+    link.appendChild(name);
 
     let bio = document.createElement('p');
-    if (json.bio != null) {
+    if (json.bio) {
       bio.innerHTML = json.bio;
     } else {
       bio.innerHTML = 'Пользователь не заполнил данное поле';
